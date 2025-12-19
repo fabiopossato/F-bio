@@ -1,0 +1,7 @@
+{
+  "name": "Copy of Copy of OSS Flow - Jiu-Jitsu Academy Management",
+  "description": "A comprehensive Jiu-Jitsu school platform featuring attendance tracking, student evolution dashboards, a standardized technique library by belt, and a personalized member portal.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
