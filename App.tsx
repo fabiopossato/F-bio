@@ -319,7 +319,29 @@ const App: React.FC = () => {
     const filteredProfessors = selectedAcademyName ? professors.filter(p => p.academyName === selectedAcademyName) : [];
 
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
+      <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4 relative">
+        {/* ÍCONE DE STATUS DE CONEXÃO NUVEM */}
+        <div className="absolute top-6 right-8 flex items-center gap-2 group cursor-help">
+          <div className="flex flex-col items-end">
+            <span className={`text-[8px] font-black uppercase tracking-widest transition-colors ${isSyncing ? 'text-blue-500' : 'text-emerald-500'}`}>
+              {isSyncing ? 'Sincronizando' : 'Nuvem Ativa'}
+            </span>
+            <span className="text-[7px] text-gray-400 font-bold uppercase tracking-tighter">OSS-SERVER-ID: CLOUD-BR-01</span>
+          </div>
+          <div className="relative">
+             <div className={`text-2xl transition-all duration-500 ${isSyncing ? 'animate-pulse scale-110 drop-shadow-[0_0_8px_rgba(59,130,246,0.5)]' : 'drop-shadow-[0_0_5px_rgba(16,185,129,0.3)]'}`}>
+               {isSyncing ? '🔄' : '☁️'}
+             </div>
+             <div className={`absolute -bottom-1 -right-1 w-2.5 h-2.5 rounded-full border-2 border-white transition-colors duration-500 ${isSyncing ? 'bg-blue-500' : 'bg-emerald-500'}`}></div>
+          </div>
+          
+          {/* TOOLTIP ON HOVER */}
+          <div className="absolute top-full right-0 mt-2 w-48 bg-slate-900 text-white p-3 rounded-xl text-[9px] font-medium leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-2xl z-50 border border-slate-800">
+            <p className="font-black text-blue-400 uppercase mb-1 tracking-widest">Status do Servidor</p>
+            Conectado via protocolo OSS-Flow-SaaS. Todas as alterações são sincronizadas em tempo real com o banco de dados mestre.
+          </div>
+        </div>
+
         <div className="max-w-md w-full bg-white p-8 rounded-3xl shadow-xl relative overflow-hidden">
           {authMode === 'dev_login' && <div className="absolute top-0 left-0 w-full h-1 bg-purple-600"></div>}
           <div className="text-center mb-8">
@@ -409,7 +431,7 @@ const App: React.FC = () => {
 
   return (
     <div className="relative">
-      {/* SINALIZADOR DE SINCRONIZAÇÃO NUVEM */}
+      {/* SINALIZADOR DE SINCRONIZAÇÃO NUVEM (DENTRO DO APP) */}
       {isSyncing && (
         <div className="fixed top-4 right-4 z-[9999] bg-blue-600 text-white px-4 py-2 rounded-full shadow-2xl flex items-center gap-2 animate-bounce border border-blue-400">
            <div className="w-2 h-2 bg-white rounded-full animate-ping"></div>
